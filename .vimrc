@@ -1,5 +1,3 @@
-syntax on
-
 set number
 set relativenumber
 set confirm
@@ -13,6 +11,10 @@ set smartcase
 set incsearch
 set hlsearch
 set wildmenu
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 let mapleader="\<space>"
 
@@ -46,6 +48,7 @@ Plug 'morhetz/gruvbox'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
+Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
