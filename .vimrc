@@ -1,56 +1,64 @@
+colorscheme default
+set background=dark
+
+syntax on
+set laststatus=2
+set hidden
 set number
 set relativenumber
+set wildmenu
+set ignorecase
+set smartcase
 set confirm
 set title
+set autoindent
+set wildmenu
+set wildmode=longest:full,full
+set updatetime=100
+" Don't offer to open certain files/directories
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set wildignore+=*.pdf,*.psd
+set wildignore+=node_modules/*,bower_components/*
+set tabstop=4       
+set smarttab
 set noswapfile
 set nobackup
 set noundofile
-set nowrap
-set ignorecase
-set smartcase
 set incsearch
 set hlsearch
-set wildmenu
-filetype plugin indent on
-set tabstop=4
+set nowrap
+" virtual tabstops using spaces
 set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 let mapleader="\<space>"
 
-nnoremap <leader>gd :YcmCompleter GoTo<cr>
-nnoremap <leader>cf :tabedit ~/.vimrc<cr>
+
+nnoremap <leader>cf :vsplit ~/.vimrc<cr>
+nnoremap <leader>cs :vsplit ~/.vim/snips/<cr>
+nnoremap <leader>v :vsplit<cr>
+nnoremap <leader>h :split<cr>
 nnoremap <leader>r :source ~/.vimrc<cr>
 nnoremap <leader>w :write<cr>
 nnoremap <leader>q :quit<cr>
 nnoremap <silent> <tab> :tabnext<cr>
 nnoremap <silent> <S-tab> :tabprevious<cr>
 nnoremap <c-t> :tabedit<cr>
-nnoremap <c-p> :FZF <cr>
-nnoremap <c-b> :NERDTreeToggle<cr>
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
+nnoremap <c-o> :Explore<cr>
+nnoremap <silent> <c-p> :edit **/*
 map <silent> <leader><cr> :noh<cr>
+nnoremap <silent> <C-l> :exe "vertical resize +10"<CR>
+nnoremap <silent> <C-h> :exe "vertical resize -10"<CR>
 
-filetype plugin on
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'junegunn/fzf'
-Plug 'valloric/youcompleteme'
-Plug 'scrooloose/nerdtree'
-
-"Themes
-Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
-
-Plug 'scrooloose/nerdcommenter'
-Plug 'vim-airline/vim-airline'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-fugitive'
-call plug#end()
-
-colorscheme onedark
-set background=dark
+if !has('gui_running')
+  set t_Co=256
+endif
+set noshowmode
