@@ -49,6 +49,7 @@ Plug 'dense-analysis/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
+Plug 'valloric/youcompleteme'
 Plug 'tomasr/molokai'
 
 
@@ -394,9 +395,9 @@ nnoremap <silent> <leader>e :FZF -m<CR>
 nmap <leader>y :History:<CR>
 
 " snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsExpandTrigger="<S-t>"
+let g:UltiSnipsJumpForwardTrigger="<S-f>"
+let g:UltiSnipsJumpBackwardTrigger="<S-b>"
 let g:UltiSnipsEditSplit="vertical"
 
 " ale
