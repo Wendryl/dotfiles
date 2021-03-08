@@ -129,10 +129,12 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+set inccommand=split
 
 "" No Swap, backup file
 set nobackup
 set noswapfile
+set nofixendofline
 
 set fileformats=unix,dos,mac
 
