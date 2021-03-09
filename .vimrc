@@ -43,6 +43,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'neoclide/coc.nvim'
 Plug 'dense-analysis/ale'
 Plug 'nanotech/jellybeans.vim'
+Plug 'joshdick/onedark.vim'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -159,7 +160,8 @@ set ruler
 set number
 set relativenumber
 
-colorscheme jellybeans
+colorscheme onedark
+hi SpellBad cterm=underline ctermbg=none
 
 let no_buffers_menu=1
 
