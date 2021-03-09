@@ -159,6 +159,7 @@ syntax on
 set ruler
 set number
 set relativenumber
+set confirm
 
 colorscheme onedark
 hi SpellBad cterm=underline ctermbg=none
@@ -337,6 +338,12 @@ nnoremap <leader>so :OpenSession<Space>
 nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
+
+" Definition navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 "" Tabs
 nnoremap <Tab> gt
