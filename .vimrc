@@ -20,6 +20,7 @@ set number
 set relativenumber
 set wildmenu
 set background=dark
+set nowrap
 
 let mapleader=','
 
@@ -60,6 +61,7 @@ Plug 'junegunn/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
+Plug 'danilo-augusto/vim-afterglow'
 
 call plug#end()
 
@@ -72,9 +74,10 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ ]
 
-colorscheme gruvbox
+colorscheme afterglow
 
 set laststatus=2
+set statusline=
 set statusline+=
 set statusline+=%#LineNr#
 set statusline+=\ %f
