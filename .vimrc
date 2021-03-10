@@ -64,5 +64,12 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:coc_disable_startup_warning = 1
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-phpls',
+  \ 'coc-marketplace',
+  \ 'coc-pairs',
+  \ 'coc-emmet',
+  \ ]
 
 colorscheme gruvbox
