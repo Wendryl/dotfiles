@@ -21,6 +21,21 @@ set relativenumber
 set wildmenu
 set background=dark
 set nowrap
+set laststatus=2
+set statusline=
+set statusline+=
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ [%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set updatetime=600
+
+autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
 
 let mapleader=','
 
@@ -65,6 +80,8 @@ Plug 'danilo-augusto/vim-afterglow'
 
 call plug#end()
 
+colorscheme afterglow
+
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
@@ -73,18 +90,3 @@ let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-emmet',
   \ ]
-
-colorscheme afterglow
-
-set laststatus=2
-set statusline=
-set statusline+=
-set statusline+=%#LineNr#
-set statusline+=\ %f
-set statusline+=%m
-set statusline+=%=
-set statusline+=%#CursorColumn#
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\ [%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
