@@ -37,6 +37,7 @@ set updatetime=600
 set colorcolumn=72
 
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
 
 let mapleader=','
 
