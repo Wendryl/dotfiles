@@ -80,14 +80,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
 Plug 'danilo-augusto/vim-afterglow'
-Plug 'junegunn/seoul256.vim'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ParamagicDev/vim-medic_chalk'
 Plug 'tpope/vim-surround'
+Plug 'tomasr/molokai'
 
 call plug#end()
 
-colorscheme gruvbox
+colorscheme molokai
 
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
