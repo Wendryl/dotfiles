@@ -83,10 +83,11 @@ Plug 'danilo-augusto/vim-afterglow'
 Plug 'junegunn/seoul256.vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ParamagicDev/vim-medic_chalk'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
-colorscheme medic_chalk
+colorscheme gruvbox
 
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
