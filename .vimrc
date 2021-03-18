@@ -70,10 +70,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nnoremap <S-Up> :m-2<CR>
-nnoremap <S-Down> :m+<CR>
-inoremap <S-Up> <Esc>:m-2<CR>
-inoremap <S-Down> <Esc>:m+<CR>
+nnoremap <S-k> :m-2<CR>
+nnoremap <S-j> :m+<CR>
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 
@@ -84,14 +82,15 @@ Plug 'junegunn/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'ParamagicDev/vim-medic_chalk'
 Plug 'tpope/vim-surround'
+Plug 'ParamagicDev/vim-medic_chalk'
 Plug 'tomasr/molokai'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'mhartington/oceanic-next'
 
 call plug#end()
 
-colorscheme molokai
+colorscheme OceanicNext
 
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
