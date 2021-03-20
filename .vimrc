@@ -39,6 +39,10 @@ set mouse=a
 
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType json setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType scss setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType css setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType html setlocal shiftwidth=2 softtabstop=2 expandtab
 
 let mapleader=','
 
@@ -87,6 +91,7 @@ Plug 'ParamagicDev/vim-medic_chalk'
 Plug 'tomasr/molokai'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'mhartington/oceanic-next'
+Plug 'ap/vim-css-color'
 
 call plug#end()
 
