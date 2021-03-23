@@ -36,6 +36,7 @@ set statusline+=\ %l:%c
 set updatetime=600
 set colorcolumn=80
 set mouse=a
+set autoread
 
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
