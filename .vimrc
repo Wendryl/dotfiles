@@ -66,7 +66,7 @@ nnoremap <leader>2 :source ~/.vimrc \| :PlugClean<CR>
 nnoremap <leader>h :<C-u>split<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
 nnoremap <leader>e :FZF<CR>
-nnoremap <F3> :Vexplore<CR>
+nnoremap <F3> :Lexplore<CR>
 
 nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>f  <Plug>(coc-fix-current)
