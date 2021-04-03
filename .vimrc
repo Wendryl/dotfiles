@@ -75,8 +75,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nnoremap <S-k> :m-2<CR>
-nnoremap <S-j> :m+<CR>
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 
