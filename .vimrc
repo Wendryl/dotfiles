@@ -66,7 +66,8 @@ nnoremap <leader>2 :source ~/.vimrc \| :PlugClean<CR>
 nnoremap <leader>h :<C-u>split<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
 nnoremap <leader>e :FZF<CR>
-nnoremap <F3> :Lexplore<CR>
+" nnoremap <F3> :Lexplore<CR>
+nnoremap <silent><F3> :NERDTreeToggle<CR>
 
 nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>f  <Plug>(coc-fix-current)
@@ -80,6 +81,7 @@ vnoremap <S-k> :m '<-2<CR>gv=gv
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 
+Plug 'preservim/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
