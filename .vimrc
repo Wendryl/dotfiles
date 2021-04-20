@@ -37,6 +37,7 @@ set updatetime=600
 set colorcolumn=80
 set mouse=a
 set autoread
+set pastetoggle=<F2>
 
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
@@ -66,7 +67,6 @@ nnoremap <leader>2 :source ~/.vimrc \| :PlugClean<CR>
 nnoremap <leader>h :<C-u>split<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
 nnoremap <leader>e :FZF<CR>
-" nnoremap <F3> :Lexplore<CR>
 nnoremap <silent><F3> :NERDTreeToggle<CR>
 
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -95,10 +95,12 @@ Plug 'tomasr/molokai'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'mhartington/oceanic-next'
 Plug 'ap/vim-css-color'
+Plug 'jaredgorski/spacecamp'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
-colorscheme OceanicNext
+colorscheme PaperColor
 
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
