@@ -68,6 +68,14 @@ nnoremap <leader>h :<C-u>split<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
 nnoremap <leader>e :FZF<CR>
 nnoremap <silent><F3> :NERDTreeToggle<CR>
+nnoremap <leader>m :NERDTreeFind<CR>
+
+" Open a NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree
+" When open change the focus to the file (and not the NERDTree)
+autocmd! VimEnter * NERDTree | wincmd w
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>f  <Plug>(coc-fix-current)
@@ -97,10 +105,12 @@ Plug 'mhartington/oceanic-next'
 Plug 'ap/vim-css-color'
 Plug 'jaredgorski/spacecamp'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'isobit/vim-darcula-colors'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
-colorscheme PaperColor
+colorscheme molokai
 
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
