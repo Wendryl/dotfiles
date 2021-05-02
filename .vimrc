@@ -29,6 +29,7 @@ set statusline+=\ %f
 set statusline+=%m
 set statusline+=%=
 set statusline+=%#CursorColumn#
+set statusline+=%{expand('%:e')}
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\ [%{&fileformat}\]
 set statusline+=\ %p%%
