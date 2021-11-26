@@ -2,9 +2,9 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set backspace=indent,eol,start
-set tabstop=4
 set softtabstop=0
-set shiftwidth=4
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set hidden
 set hlsearch
@@ -19,7 +19,6 @@ set confirm
 set number
 set relativenumber
 set wildmenu
-set background=dark
 set nowrap
 set laststatus=2
 set statusline=
@@ -46,6 +45,9 @@ autocmd FileType json setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType scss setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType css setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType html setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType php setlocal shiftwidth=4 softtabstop=4 expandtab
+autocmd FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
+au BufNewFile,BufRead *.ejs set filetype=html
 
 let mapleader=','
 
@@ -68,13 +70,15 @@ nnoremap <leader>2 :source ~/.vimrc \| :PlugClean<CR>
 nnoremap <leader>h :<C-u>split<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
 nnoremap <leader>e :FZF<CR>
-nnoremap <silent><F3> :NERDTreeToggle<CR>
+nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <leader>m :NERDTreeFind<CR>
 
-" Open a NERDTree automatically when vim starts up
-autocmd vimenter * NERDTree
-" When open change the focus to the file (and not the NERDTree)
-autocmd! VimEnter * NERDTree | wincmd w
+" Vimspector Mappings
+nnoremap <Leader>d :call vimspector#Launch()<CR>
+nnoremap <Leader>t :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>T :call vimspector#ClearBreakpoints()<CR>
+
+
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -91,6 +95,7 @@ vnoremap <S-k> :m '<-2<CR>gv=gv
 call plug#begin(expand('~/.config/nvim/plugged'))
 
 Plug 'preservim/nerdtree'
+Plug 'jwalton512/vim-blade'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
@@ -98,20 +103,21 @@ Plug 'junegunn/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
+Plug 'srcery-colors/srcery-vim'
+Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-surround'
-Plug 'ParamagicDev/vim-medic_chalk'
-Plug 'tomasr/molokai'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'mhartington/oceanic-next'
-Plug 'ap/vim-css-color'
-Plug 'jaredgorski/spacecamp'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'isobit/vim-darcula-colors'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'puremourning/vimspector'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-colorscheme molokai
+let base16colorspace=256  " Access colors present in 256 colorspace
+set background=dark
+syntax on
+colorscheme gruvbox
 
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
@@ -135,3 +141,4 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+" let g:vimspector_enable_mappings = 'HUMAN'
