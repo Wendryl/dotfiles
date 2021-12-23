@@ -28,8 +28,7 @@ set statusline+=\ %f
 set statusline+=%m
 set statusline+=%=
 set statusline+=%#CursorColumn#
-set statusline+=%{expand('%:e')}
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=%{expand(&filetype)}
 set statusline+=\ [%{&fileformat}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
@@ -105,19 +104,19 @@ Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
 Plug 'srcery-colors/srcery-vim'
 Plug 'nanotech/jellybeans.vim'
-Plug 'tpope/vim-surround'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'puremourning/vimspector'
 Plug 'ryanoasis/vim-devicons'
+Plug 'maxmellon/vim-jsx-pretty'
 
 call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 set background=dark
 syntax on
-colorscheme gruvbox
+colorscheme jellybeans
 
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
