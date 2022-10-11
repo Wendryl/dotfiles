@@ -32,11 +32,21 @@ set statusline+=%{expand(&filetype)}
 set statusline+=\ [%{&fileformat}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
-set updatetime=600
+set updatetime=300
 set colorcolumn=80
-set mouse=a
 set autoread
-set pastetoggle=<F2>
+set mouse=a
+set background=dark
+syntax on
+
+" " Enable true color
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+set t_Co=256
 
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
@@ -44,9 +54,10 @@ autocmd FileType json setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType scss setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType css setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType html setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType blade setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType php setlocal shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
-au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.blade.php set filetype=html
 
 let mapleader=','
 
@@ -56,77 +67,43 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
+" Tab Navigation
+nnoremap <silent> <Tab> gt<CR>
+nnoremap <silent> <S-Tab> gT<CR>
 nnoremap <silent> <S-t> :tabnew<CR>
+
+" Clear selection
 nnoremap <silent> <leader><space> :noh<cr>
+" Save
 nnoremap <Leader>w :w<CR>
+" Quit
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>cf :tabedit ~/.vimrc<CR>
-nnoremap <Leader>r :source ~/.vimrc<CR>
-nnoremap <leader>1 :source ~/.vimrc \| :PlugInstall<CR>
-nnoremap <leader>2 :source ~/.vimrc \| :PlugClean<CR>
+" Open config file
+nnoremap <Leader>cf :tabedit ~/.config/nvim/init.vim<CR>
+" Reload nvim
+nnoremap <Leader>r :source ~/.config/nvim/init.vim<CR>
+" Install plugins
+nnoremap <leader>1 :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
+" Uninstall plugins
+nnoremap <leader>2 :source ~/.config/nvim/init.vim \| :PlugClean<CR>
 nnoremap <leader>h :<C-u>split<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
-nnoremap <leader>e :FZF<CR>
+nnoremap <leader>e <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <leader>m :NERDTreeFind<CR>
+nnoremap <leader>pf :CocCommand prettier.formatFile<CR>
 
-" Vimspector Mappings
-nnoremap <Leader>d :call vimspector#Launch()<CR>
-nnoremap <Leader>t :call vimspector#ToggleBreakpoint()<CR>
-nnoremap <Leader>T :call vimspector#ClearBreakpoints()<CR>
-
+" Move lines up and down
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
 
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-nmap <leader>ac  <Plug>(coc-codeaction)
-nmap <leader>f  <Plug>(coc-fix-current)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-vnoremap <S-j> :m '>+1<CR>gv=gv
-vnoremap <S-k> :m '<-2<CR>gv=gv
-
-call plug#begin(expand('~/.config/nvim/plugged'))
-
-Plug 'preservim/nerdtree'
-Plug 'jwalton512/vim-blade'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
-Plug 'junegunn/fzf'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-commentary'
-Plug 'morhetz/gruvbox'
-Plug 'srcery-colors/srcery-vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'puremourning/vimspector'
-Plug 'ryanoasis/vim-devicons'
-Plug 'maxmellon/vim-jsx-pretty'
-
-call plug#end()
-
-let base16colorspace=256  " Access colors present in 256 colorspace
-set background=dark
-syntax on
-colorscheme jellybeans
-
-let g:coc_disable_startup_warning = 1
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-phpls',
-  \ 'coc-marketplace',
-  \ 'coc-pairs',
-  \ 'coc-emmet',
-  \ 'coc-snippets',
-  \ ]
+" CocNvim setup
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
@@ -139,5 +116,91 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
-" let g:vimspector_enable_mappings = 'HUMAN'
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>f  <Plug>(coc-fix-current)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+call plug#begin(expand('~/.config/nvim/plugged'))
+
+Plug 'preservim/nerdtree'
+Plug 'jwalton512/vim-blade'
+Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-commentary'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'APZelos/blamer.nvim'
+Plug 'pangloss/vim-javascript'
+Plug 'stanangeloff/php.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'heavenshell/vim-jsdoc', {
+  \ 'for': ['javascript', 'javascript.jsx','typescript'],
+  \ 'do': 'make install'
+\}
+
+" Colorschemes
+Plug 'crusoexia/vim-monokai'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'boschni/vim-sublime256'
+Plug 'tomasr/molokai'
+Plug 'w0ng/vim-hybrid'
+Plug 'bluz71/vim-nightfly-guicolors'
+
+call plug#end()
+
+colorscheme jellybeans
+
+let g:coc_disable_startup_warning = 0
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-phpls',
+  \ 'coc-marketplace',
+  \ 'coc-pairs',
+  \ 'coc-emmet',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-css',
+  \ ]
+
+let g:blamer_enabled = 1
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = { enable = true },
+    incremental_selection = { enable = true },
+    textobjects = { enable = true },
+    indent = { enable = true },
+}
+EOF
+
