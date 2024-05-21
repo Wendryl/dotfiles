@@ -1,0 +1,81 @@
+" Vim minimal configuration for web dev without plugins
+set nocompatible
+set relativenumber
+set number
+syntax on
+set laststatus=2
+set wildmenu
+set wildmode=longest:full,full
+set path+=**
+set nowrap
+set hlsearch
+set autoindent
+set expandtab
+set scrolloff=2
+set hlsearch                " hlsearches
+set ignorecase
+set notermguicolors
+set noswapfile
+
+colorscheme lunaperche
+
+let mapleader = ","
+
+nnoremap <leader>r :source ~/.vimrc<CR>
+nnoremap <leader>cf :edit ~/.vimrc<CR>
+nnoremap <leader>cb :edit ~/.zshrc<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>x :q<CR>
+nnoremap <leader>q :bdelete<CR>
+nnoremap <leader>t :PhpTest<CR>
+
+augroup FileTypeSpecificAutocommands
+    autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType typescript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType scss setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4
+augroup END
+
+highlight ColorColumn ctermbg=darkblue
+call matchadd('ColorColumn', '\%81v',100)
+noremap <silent><leader><space> :nohls<CR>
+
+command! PhpTest !php artisan test
+
+call plug#begin()
+
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
+call plug#end()
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
